@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 
 import { listCharacters } from '@api/character';
 import { Character } from '@api/character/model';
+import { ThemeContext } from '@contexts/theme';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { RootStackParamsList } from 'App';
 import {
-  Button,
   Dimensions,
   ImageBackground,
   SafeAreaView,
@@ -15,9 +15,7 @@ import {
   Text,
   TouchableOpacity,
   View,
-  useColorScheme,
 } from 'react-native';
-import { Colors } from 'react-native/Libraries/NewAppScreen';
 
 type Props = NativeStackScreenProps<RootStackParamsList, 'Home'>;
 
@@ -28,11 +26,7 @@ const GAP = 16,
 function Home({ navigation }: Props) {
   const [data, setData] = useState<Character[]>([]);
 
-  const isDarkMode = useColorScheme() === 'dark';
-  const themeStyle = {
-    shadowColor: isDarkMode ? Colors.lighter : Colors.darker,
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-  };
+  const { theme } = useContext(ThemeContext);
 
   useEffect(() => {
     async function initComponent() {
@@ -49,10 +43,11 @@ function Home({ navigation }: Props) {
   }, []);
 
   return (
-    <SafeAreaView style={themeStyle}>
+    <SafeAreaView
+      style={{ ...styles.wrapper, backgroundColor: theme.backgroundColor }}>
       <StatusBar
-        barStyle={isDarkMode ? 'light-content' : 'dark-content'}
-        backgroundColor={themeStyle.backgroundColor}
+        barStyle={theme.barStyle}
+        backgroundColor={theme.backgroundColor}
       />
       <ScrollView
         contentContainerStyle={styles.container}
@@ -62,12 +57,12 @@ function Home({ navigation }: Props) {
             key={index}
             style={{
               ...styles.background,
-              shadowColor: themeStyle.shadowColor,
+              shadowColor: theme.color,
             }}
             source={{ uri: item.image }}>
             <TouchableOpacity
               style={styles.button}
-              onPress={() => navigation.navigate('Character', { id: item.id })}>
+              onPress={() => navigation.navigate('Character', item)}>
               <View style={styles.card}>
                 <View style={styles.chip}>
                   <Text style={styles.specie}>
@@ -84,6 +79,9 @@ function Home({ navigation }: Props) {
   );
 }
 const styles = StyleSheet.create({
+  wrapper: {
+    flex: 1,
+  },
   container: {
     padding: GAP,
     flexWrap: 'wrap',
@@ -108,7 +106,7 @@ const styles = StyleSheet.create({
     height: ITEM_WIDTH,
   },
   card: {
-    gap: 2,
+    gap: 4,
     padding: 12,
     width: '100%',
     height: '100%',
@@ -126,10 +124,12 @@ const styles = StyleSheet.create({
   specie: {
     fontSize: 12,
     fontWeight: '500',
+    color: '#FFFFFF',
   },
   name: {
     fontSize: 16,
     fontWeight: '500',
+    color: '#FFFFFF',
   },
 });
 

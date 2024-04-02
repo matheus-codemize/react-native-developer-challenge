@@ -30,3 +30,12 @@ export interface Character {
   url: string; // Link to the character's own URL endpoint.
   created: Date; //	Time at which the character was created in the database
 }
+
+export interface Episode {
+  id: number;
+  url: string;
+  name: string;
+  episode: string;
+  air_date: string;
+  characters: string[];
+}
