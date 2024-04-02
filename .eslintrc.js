@@ -1,7 +1,8 @@
 module.exports = {
   env: {
-    browser: true,
+    node: true,
     es2021: true,
+    browser: true,
   },
   extends: [
     'eslint:recommended',
@@ -28,7 +29,6 @@ module.exports = {
     '@typescript-eslint/interface-name-prefix': 'off',
     '@typescript-eslint/member-delimiter-style': 'off',
     '@typescript-eslint/no-var-requires': 'off',
-    'object-curly-spacing': ['error', 'always'],
     'import/namespace': 'off',
     'import/no-unresolved': 'off',
     'import/order': [
@@ -60,8 +60,10 @@ module.exports = {
     'prettier/prettier': ['error', { endOfLine: 'auto', useTabs: false }],
   },
   settings: {
-    react: {
-      version: 'detect',
+    'import/resolver': {
+      node: {
+        extensions: ['.js', '.jsx', '.ts', '.tsx', 'mdx'],
+      },
     },
   },
 };

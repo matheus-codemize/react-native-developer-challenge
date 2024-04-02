@@ -1,12 +1,12 @@
 import React from 'react';
+
 import {
   SafeAreaView,
   ScrollView,
   StatusBar,
-  StyleSheet,
+  // StyleSheet,
   useColorScheme,
 } from 'react-native';
-
 import { Colors } from 'react-native/Libraries/NewAppScreen';
 
 function App(): React.JSX.Element {
@@ -27,6 +27,6 @@ function App(): React.JSX.Element {
   );
 }
 
-const styles = StyleSheet.create({});
+// const styles = StyleSheet.create({});
 
 export default App;
