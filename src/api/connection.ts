@@ -13,11 +13,11 @@ const requestInterceptor = (url: string, options: any) => {
     };
   }
 
-  return {url, options};
+  return { url, options };
 };
 
 const responseInterceptor = async (
-  response: Response & {_retry?: boolean},
+  response: Response & { _retry?: boolean },
 ): Promise<any> => {
   if (!response.ok) {
     const error = await response.json();
@@ -38,7 +38,7 @@ const fetchConfig = async <T>(
   options: RequestInit = {},
 ): Promise<T> => {
   const apiUrl = `${baseUrl}${url}`;
-  const {url: updatedUrl, options: updatedOptions} = requestInterceptor(
+  const { url: updatedUrl, options: updatedOptions } = requestInterceptor(
     apiUrl,
     options,
   );
@@ -58,7 +58,7 @@ const fetchConfig = async <T>(
 
 const api = {
   get: <T>(url: string, options?: RequestInit): RequestType<T> =>
-    fetchConfig<T>(url, {...options, method: 'GET'}),
+    fetchConfig<T>(url, { ...options, method: 'GET' }),
   post: <T>(url: string, body?: any, options?: RequestInit): RequestType<T> =>
     fetchConfig<T>(url, {
       ...options,
@@ -66,11 +66,11 @@ const api = {
       body: options?.headers ? body : JSON.stringify(body),
     }),
   put: <T>(url: string, body: RequestBodyType): RequestType<T> =>
-    fetchConfig<T>(url, {method: 'PUT', body: JSON.stringify(body)}),
+    fetchConfig<T>(url, { method: 'PUT', body: JSON.stringify(body) }),
   delete: <T>(url: string): RequestType<T> =>
-    fetchConfig<T>(url, {method: 'DELETE'}),
+    fetchConfig<T>(url, { method: 'DELETE' }),
   patch: <T>(url: string, body: RequestBodyType): RequestType<T> =>
-    fetchConfig<T>(url, {method: 'PATCH', body: JSON.stringify(body)}),
+    fetchConfig<T>(url, { method: 'PATCH', body: JSON.stringify(body) }),
 };
 
 export default api;

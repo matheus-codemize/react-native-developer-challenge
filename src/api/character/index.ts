@@ -23,9 +23,7 @@ export type ResponseCharacter = {
   results: Character[];
 };
 
-export const listCharacters = async (
-  data?: RequestCharacter,
-): Promise<ResponseCharacter> => {
+export const listCharacters = async (data?: RequestCharacter) => {
   let filter = '?';
 
   if (data) {
@@ -36,5 +34,5 @@ export const listCharacters = async (
     });
   }
 
-  return await api.get(`/character/${filter}`);
+  return await api.get<ResponseCharacter>(`/character/${filter}`);
 };

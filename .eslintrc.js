@@ -29,6 +29,7 @@ module.exports = {
     '@typescript-eslint/interface-name-prefix': 'off',
     '@typescript-eslint/member-delimiter-style': 'off',
     '@typescript-eslint/no-var-requires': 'off',
+    '@typescript-eslint/no-unused-vars': 'warn',
     'import/namespace': 'off',
     'import/no-unresolved': 'off',
     'import/order': [
