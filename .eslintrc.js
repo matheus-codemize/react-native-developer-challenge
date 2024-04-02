@@ -1,4 +1,67 @@
 module.exports = {
-  root: true,
-  extends: '@react-native',
+  env: {
+    browser: true,
+    es2021: true,
+  },
+  extends: [
+    'eslint:recommended',
+    'plugin:import/recommended',
+    'plugin:import/typescript',
+    'plugin:@typescript-eslint/recommended',
+    'plugin:prettier/recommended',
+  ],
+  parser: '@typescript-eslint/parser',
+  parserOptions: {
+    ecmaFeatures: {
+      jsx: true,
+    },
+    ecmaVersion: 12,
+    sourceType: 'module',
+  },
+  plugins: ['prettier', 'import', '@typescript-eslint'],
+  rules: {
+    '@typescript-eslint/no-empty-interface': 'off',
+    '@typescript-eslint/prefer-as-const': 'off',
+    '@typescript-eslint/no-explicit-any': 'off',
+    '@typescript-eslint/explicit-function-return-type': 'off',
+    '@typescript-eslint/explicit-module-boundary-types': 'off',
+    '@typescript-eslint/interface-name-prefix': 'off',
+    '@typescript-eslint/member-delimiter-style': 'off',
+    '@typescript-eslint/no-var-requires': 'off',
+    'object-curly-spacing': ['error', 'always'],
+    'import/namespace': 'off',
+    'import/no-unresolved': 'off',
+    'import/order': [
+      'error',
+      {
+        alphabetize: {
+          caseInsensitive: true,
+          order: 'asc',
+        },
+        groups: [
+          'builtin',
+          'external',
+          'internal',
+          'parent',
+          'sibling',
+          'index',
+        ],
+        'newlines-between': 'always',
+        pathGroups: [
+          {
+            group: 'external',
+            pattern: 'react',
+            position: 'before',
+          },
+        ],
+        pathGroupsExcludedImportTypes: ['react'],
+      },
+    ],
+    'prettier/prettier': ['error', { endOfLine: 'auto', useTabs: false }],
+  },
+  settings: {
+    react: {
+      version: 'detect',
+    },
+  },
 };
